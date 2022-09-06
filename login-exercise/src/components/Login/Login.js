@@ -49,11 +49,14 @@ const Login = (props) => {
     };
   }, []);
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
   useEffect(() => {
     // setTimeout is used to delay the validation = debounce
     const identifier = setTimeout(() => {
       console.log("Checking form validity!");
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     // cleanup function - runs before the next useEffect runs
@@ -61,7 +64,7 @@ const Login = (props) => {
       console.log("CLEANUP");
       clearTimeout(identifier);
     };
-  }, [emailState, passwordState]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
