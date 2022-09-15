@@ -1,20 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const SimpleInput = (props) => {
   // we use ref when we want to access the value of an element once
-  const nameInputRef = useRef();
+  // const nameInputRef = useRef();
   // we use state when we want to re-render the component when the value changes, thus every keystroke or when we want to clear the input
   const [enteredName, setEnteredName] = useState("");
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+
+  const enteredNameIsValid = enteredName.trim() !== "";
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
   const nameInputChangedHandler = (event) => {
     setEnteredName(event.target.value);
-
-    if (enteredName.trim() === "") {
-      setEnteredNameIsValid(false);
-      return;
-    }
   };
 
   const nameInputBlurHandler = (event) => {
@@ -26,20 +23,18 @@ const SimpleInput = (props) => {
 
     setEnteredNameTouched(true);
 
-    if (enteredName.trim() === "") {
-      setEnteredNameIsValid(false);
+    if (!enteredNameIsValid) {
       return;
     }
 
-    setEnteredNameIsValid(true);
-
     console.log(enteredName);
 
-    const enteredValue = nameInputRef.current.value;
-    console.log(enteredValue);
-  };
+    // const enteredValue = nameInputRef.current.value;
+    // console.log(enteredValue);
 
-  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+    setEnteredName("");
+    setEnteredNameTouched(false);
+  };
 
   const nameInputClasses = nameInputIsInvalid
     ? "form-control invalid"
@@ -50,7 +45,6 @@ const SimpleInput = (props) => {
       <div className={nameInputClasses}>
         <label htmlFor="name">Your Name</label>
         <input
-          ref={nameInputRef}
           type="text"
           id="name"
           onChange={nameInputChangedHandler}
