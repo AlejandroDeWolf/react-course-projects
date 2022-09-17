@@ -42,6 +42,7 @@ const Cart = (props) => {
     );
     setIsSubmitting(false);
     setDidSubmit(true);
+    cartCtx.clearCart();
   };
 
   // we need bind here because we are passing a function as a prop to a child component and we need to bind the function to the current context
