@@ -13,7 +13,7 @@ const AvailableMeals = () => {
     const fetchMeals = async () => {
       // fetch returns a promise, since sending an http request is an async operation, hence we need to use async await to provide a function that will be executed once the promise is resolved
       const response = await fetch(
-        "https://food-ordering-app-api-default-rtdb.europe-west1.firebasedatabase.app/meals"
+        "https://food-ordering-app-api-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
       );
 
       if (!response.ok) {
