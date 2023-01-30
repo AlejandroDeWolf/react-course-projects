@@ -7,6 +7,7 @@ import Products from "./components/Shop/Products";
 import { uiActions } from "./store/ui-slice";
 import Notification from "./components/UI/Notification";
 
+// This is a flag to prevent the useEffect from running on the first render
 let isInitial = true;
 
 function App() {
