@@ -11,7 +11,7 @@ const cartSlice = createSlice({
       // if item is not in cart, add it to cart
       if (!existingItem) {
         state.items.push({
-          itemId: newItem.id,
+          id: newItem.id,
           price: newItem.price,
           quantity: 1,
           totalPrice: newItem.price,
