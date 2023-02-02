@@ -1,7 +1,7 @@
 import React from "react";
 
-const NewEvent = () => {
+const NewEventPage = () => {
   return <div>NewEvent</div>;
 };
 
-export default NewEvent;
+export default NewEventPage;
