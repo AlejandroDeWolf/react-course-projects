@@ -9,3 +9,14 @@ function EventsPage() {
 }
 
 export default EventsPage;
+
+export async function loader() {
+  const response = await fetch("http://localhost:8080/events");
+
+  if (!response.ok) {
+  } else {
+    const resData = await response.json();
+    // react router will pass this data to the component by returning it
+    return resData.events;
+  }
+}
