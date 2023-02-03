@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form } from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
@@ -9,7 +9,8 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <form className={classes.form}>
+    // by using the Form component, we can use the "method" prop to set the HTTP method and it will be send to the action URL
+    <Form method="post" className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -56,7 +57,7 @@ function EventForm({ method, event }) {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 }
 
