@@ -1,9 +1,20 @@
-import { useNavigate, Form } from "react-router-dom";
+import {
+  useNavigate,
+  Form,
+  useNavigation,
+  useActionData,
+} from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
 function EventForm({ method, event }) {
+  // we can use the useActionData hook to get the data from the action URL
+  const data = useActionData();
   const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
+
   function cancelHandler() {
     navigate("..");
   }
@@ -11,6 +22,14 @@ function EventForm({ method, event }) {
   return (
     // by using the Form component, we can use the "method" prop to set the HTTP method and it will be send to the action URL
     <Form method="post" className={classes.form}>
+      {/* output validation messages we might be getting from the backend */}
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -52,10 +71,12 @@ function EventForm({ method, event }) {
         />
       </p>
       <div className={classes.actions}>
-        <button type="button" onClick={cancelHandler}>
+        <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel
         </button>
-        <button>Save</button>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Save"}
+        </button>
       </div>
     </Form>
   );
