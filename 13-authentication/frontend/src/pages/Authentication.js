@@ -41,6 +41,9 @@ export async function action({ request }) {
   const token = resData.token;
 
   localStorage.setItem("token", token);
+  const expiration = new Date();
+  expiration.setHours(expiration.getHours() + 1); // 1 hour
+  localStorage.setItem("expiration", expiration.toISOString()); // ISOS is used to convert the date to a string
 
   return redirect("/");
 }
