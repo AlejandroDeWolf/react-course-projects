@@ -1,3 +1,5 @@
+import { MongoClient } from "mongodb";
+
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_MEETUPS = [
@@ -43,10 +45,26 @@ function HomePage(props) {
 // this way we can pre-render the page with the data we fetch, the source code of the page will be generated at build time
 export async function getStaticProps() {
   // fetch data from an API
+  const client = await MongoClient.connect(
+    "mongodb+srv://alejandrodewolf:alejandro12345@cluster0.xgqbm.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find().toArray();
+
+  client.close();
 
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        id: meetup._id.toString(),
+      })),
     },
     // every 10 seconds, the page will be re-generated
     revalidate: 10,
