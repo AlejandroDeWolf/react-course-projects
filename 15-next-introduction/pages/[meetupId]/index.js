@@ -37,7 +37,7 @@ export async function getStaticPaths() {
 
   return {
     // fallback tells Next.js what pages to generate in advance, if its false it will only generate the pages that are defined in the paths array
-    fallback: false,
+    fallback: "blocking", // true, false, 'blocking' -> 'blocking' will wait for the page to be generated before sending the response to the client
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
