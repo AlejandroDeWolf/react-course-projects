@@ -51,5 +51,11 @@ people = [
 
 let course = "React - The Complete Guide";
 
-// course = 12345; --> error
+// course = 12345; error
 course = "React - The Best Guide";
+
+// Union types
+
+let secondCourse: string | number = "React - The Complete Guide";
+
+secondCourse = 12345; // no error
