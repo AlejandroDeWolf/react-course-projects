@@ -21,20 +21,19 @@ let hobbies: string[]; // array of strings
 
 hobbies = ["Sports", "Cooking", "Coding"];
 
-let person: {
+type Person = {
   name: string;
   age: number;
 };
+
+let person: Person;
 
 person = {
   name: "Max",
   age: 30,
 };
 
-let people: {
-  name: string;
-  age: number;
-}[];
+let people: Person[];
 
 people = [
   {
