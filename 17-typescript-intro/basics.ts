@@ -58,3 +58,28 @@ course = "React - The Best Guide";
 let secondCourse: string | number = "React - The Complete Guide";
 
 secondCourse = 12345; // no error
+
+// Functions & types
+
+function add(a: number, b: number) {
+  // return type is inferred, it will be number automatically
+  return a + b;
+}
+
+function print(value: any) {
+  console.log(value);
+}
+
+// Generics
+
+function insertAtBeginning<T>(array: T[], value: T) {
+  const newArray = [value, ...array];
+  return newArray;
+}
+
+const demoArray = [1, 2, 3];
+
+const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2, 3]
+const stringArray = insertAtBeginning(["a", "b", "c"], "d"); // ['d', 'a', 'b', 'c']
+
+// updatedArray[0].split(''); // error
